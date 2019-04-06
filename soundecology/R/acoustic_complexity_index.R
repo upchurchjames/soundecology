@@ -6,70 +6,8 @@
 # Ecological Indicators 11: 868-873.
 #
 # Tested with SoundscapeMeter 1.0.14.05.2012, courtesy of A. Farina
-#
-# TODO: Clean up code, SPlit files on J, look over other indicies
 
-getSplitFile <- function(time,file,j,len) {
-
-  if(time+j>len){
-    return ()
-  }
-  else{
-    return (readWave(file,from=time,to=time+j,units="seconds"))
-  }
-  #return readWave(file,from = start, to=end, units = "seconds")
-}
-
-acousticComplexitySplit <- function
-(
-  soundfile,
-  fileLength,
-  minFreq = NA,
-  maxFreq = NA,
-  j = 5,
-  fft_w = 512,
-  split = NA,
-  matrix = TRUE,
-  bands = TRUE
-) {
-
-  #file length given in milliseconds
-  lengthSeconds = fileLength / 1000
-  #cutting length to size
-  lengthSeconds = lengthSeconds - lengthSeconds%%j
-  timeVector = seq(0,lengthSeconds,j)
-
-  splitSound = lapply(timeVector,getSplitFile,file=soundfile,j=j,len=lengthSeconds)
-  splitSound[sapply(splitSound, is.null)] <- NULL
-  results = sapply(splitSound,acoustic_complexity_new,minFreq,maxFreq,j=j,fft_w=fft_w,matrix=matrix,bands=bands)
-
-  numRows = 5
-  if(matrix){
-    numRows = numRows + 2
-  }
-  if(bands){
-    numRows = numRows + 2
-  }
-  numCols = dim(results)[2]
-  print(numCols)
-  numRows = dim(results)[1]
-  print(numRows)
-  
-  return(
-    list(
-      aciTotAllLeft <- sum(unlist(results[1,1:numCols])),
-      aciTotAllRight <- sum(unlist(results[2,1:numCols])),
-      aciTotLeftByMin <- round( (aciTotAllLeft / lengthSeconds) * 60, 2),
-      aciTotRightByMin <- round( (aciTotAllRight / lengthSeconds) * 60, 2),
-      aciOverTimeLeft <- c(unlist(results[5,1:numCols])),
-      aciOverTimeRight <- c(unlist(results[6,1:numCols]))
-    )
-  )
-  }
-
-
-
-acoustic_complexity_new <- function(
+acoustic_complexity <- function(
   soundfile,
   minFreq = NA,
   maxFreq = NA,
