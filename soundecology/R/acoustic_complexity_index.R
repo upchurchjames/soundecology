@@ -485,8 +485,8 @@ acoustic_complexity <- function(
 
   if (bands) {
     bands <- list(
-      aciFlLeftVals = aciFlLeftVector,
-      aciFlRightVals = aciFlRightVector
+      aciFlValsL = aciFlLeftVector,
+      aciFlValsR = aciFlRightVector
     )
     return <- c(return, bands)
   }
