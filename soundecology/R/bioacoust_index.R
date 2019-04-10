@@ -45,7 +45,7 @@ bioacoustic_index <- function(soundfile, min_freq = 2000, max_freq = 8000, fft_w
 	if (max_freq > nyquist_freq) {
 		cat(paste("\n ERROR: The maximum acoustic frequency that this file can use is ", nyquist_freq, "Hz. But the script was set to measure up to ", max_freq, "Hz.\n\n", sep = ""))
 		break
-		}
+	}
 
 	#Stereo file
 	if (soundfile@stereo == TRUE) {
@@ -129,5 +129,10 @@ bioacoustic_index <- function(soundfile, min_freq = 2000, max_freq = 8000, fft_w
 		right_area <- NA
 	}
 	invisible(list(areaL = left_area,
-	               areaR = right_area))
+	               areaR = right_area,
+	               valsL = specA_left_segment,
+	               valsR = specA_right_segment,
+	               valsNormalizedL = specA_left_segment_normalized,
+	               valsNormalizedR = specA_right_segment_normalized,
+	               freqVals = freqs))
 }
