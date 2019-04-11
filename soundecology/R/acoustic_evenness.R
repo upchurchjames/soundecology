@@ -248,8 +248,8 @@ acoustic_evenness <- function(soundfile, max_freq = 10000, db_threshold = -50, f
 	}
 	invisible(list(aeiL = left_gini_return,
 	               aeiR = right_gini_return,
-	               bandValuesL = left_bandvals_return,
-	               bandValuesR = right_bandvals_return,
-	               bandRangeValuesL = left_bandrange_return,
-	               bandRangeValuesR = right_bandrange_return))
+	               bandL = left_bandvals_return,
+	               bandR = right_bandvals_return,
+	               bandRangeL = left_bandrange_return,
+	               bandRangeR = right_bandrange_return))
 }
