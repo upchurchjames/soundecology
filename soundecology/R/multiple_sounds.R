@@ -226,13 +226,13 @@ multiple_sounds <- function(directory, resultfile, soundindex = c("ndsi", "acous
 			#Get args
 			args <- list(...)
 			
-			if(!is.null(args[['max_freq']])) {
-			  max_freq = args[['max_freq']]
+			if(!is.null(args[['maxFreq']])) {
+			  max_freq = args[['maxFreq']]
 			}else{
 			  max_freq = formals(acoustic_complexity)$max_freq
 			}
-			if(!is.null(args[['min_freq']])) {
-			  min_freq = args[['min_freq']]
+			if(!is.null(args[['minFreq']])) {
+			  min_freq = args[['minFreq']]
 			}else{
 			  min_freq = 1
 			}
